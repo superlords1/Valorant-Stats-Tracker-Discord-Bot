@@ -3,6 +3,8 @@ from discord import app_commands
 from discord.ext import commands
 from stats import getCompData
 from utils import get_url
+import os
+from dotenv import load_dotenv
 
 bot = commands.Bot(command_prefix = "!", intents = discord.Intents.all())
 
@@ -26,5 +28,5 @@ async def stats(ctx, args):
     
     await ctx.send(embed = getCompData(url, username_tag))
 
-
-bot.run("MTA1NzMxMTYwMDM4MzYzOTY1Mg.GstKc9.D9_A52AKemEooeuUelMd6Fp94mGp4nvGKFNLLU")
+load_dotenv()
+bot.run(os.getenv("token"))
