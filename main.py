@@ -5,6 +5,7 @@ from stats import getCompData
 from utils import get_url
 import os
 from dotenv import load_dotenv
+from boto.s3.connection import S3Connection
 
 bot = commands.Bot(command_prefix = "!", intents = discord.Intents.all())
 
@@ -28,5 +29,5 @@ async def stats(ctx, args):
     
     await ctx.send(embed = getCompData(url, username_tag))
 
-load_dotenv()
-bot.run(os.getenv("token"))
+#load_dotenv()
+bot.run(os.environ["token"])
