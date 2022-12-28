@@ -25,6 +25,7 @@ async def stats(ctx, args):
         await ctx.send(embed = discord.Embed(title = "Please send your username followed by the tag"))
         return
     username_tag = args.split("#")
+    await ctx.send("test")
     url = get_url(username_tag[0], username_tag[1])
     
     await ctx.send(embed = getCompData(url, username_tag))

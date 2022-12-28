@@ -12,15 +12,15 @@ from utils import get_url
 import os
 
 def getCompData(url, username_tag):
-    try:
-        chrome_options = webdriver.ChromeOptions()
-        chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-        chrome_options.add_argument("--headless")
-        chrome_options.add_argument("--disable-dev-shm-usage")
-        chrome_options.add_argument("--no-sandbox")
-        driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
-        driver.get(url)
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=chrome_options)
+    driver.get(url)
         
+    try:
         rank = driver.find_element(By.CLASS_NAME, "stat__value")
         stats = driver.find_elements(By.CLASS_NAME, "numbers")
         embedvar = discord.Embed(title = f"Stats for: {username_tag[0]}#{username_tag[1]}")
@@ -33,7 +33,8 @@ def getCompData(url, username_tag):
                 value = stat.find_element(By.CLASS_NAME, "value")
                 embedvar.add_field(name = title, value = str(value.text), inline = False)
         return embedvar
-    except:
+    except Exception as e:
+        print(e)
         return discord.Embed(title = "User not found")
     #driver.close()
 
